@@ -1,25 +1,26 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { Box, Card, Typography } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({characters}) {
   return (
-    <div>
-      <h1>Rick and Morty</h1>
+    <Box className="container">
+      <Typography>Rick and Morty</Typography>
 
-      <ul>
+      <Card className="list">
         {characters.map(character => (
-          <li key={character.id}>
-            <h2>{character.name}</h2>
-            <p>Species: {character.species}</p>
-            <p>Status: {character.status}</p>
-           
-          </li>
+          <div key={character.id}>
+            <Typography>{character.name}</Typography>
+            <Typography>Species: {character.species}</Typography>
+            <Typography>Status: {character.status}</Typography>
+           <Typography>Gender: {character.gender}</Typography>
+          </div>
         ))}
-      </ul>
-    </div>
+      </Card>
+    </Box>
     
   )
 }
@@ -41,6 +42,7 @@ export async function getStaticProps() {
             image
             species
             status
+            gender
           }
         }
       }
